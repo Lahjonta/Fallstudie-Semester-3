@@ -93,10 +93,8 @@ def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     # resize the image
     return cv2.resize(image, dim, interpolation = inter)
 
-def predict_age(input_path: str):
+def predict_age(img):
     """Predict the age of the faces showing in the image"""
-    # Read Input Image
-    img = cv2.imread(input_path)
     # Take a copy of the initial image and resize it
     frame = img.copy()
     if frame.shape[1] > frame_width:
@@ -114,10 +112,4 @@ def predict_age(input_path: str):
         age_preds = age_net.forward()
         i = age_preds[0].argmax()
         age = AGE_INTERVALS[i]
-        print(age)
-
-
-
-
-if __name__ == '__main__':
-    predict_age("happy_child.jpg")
+        return age
