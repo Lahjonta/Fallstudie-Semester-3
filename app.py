@@ -8,6 +8,7 @@ import pandas as pd
 from st_aggrid import AgGrid
 import plotly.express as px
 import io
+from tempfile import NamedTemporaryFile
 from PIL import Image
 import numpy as np
 from deepface import DeepFace
@@ -25,9 +26,8 @@ def analyze_image(uploaded_image):
 
     emotion = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
     age = DeepFace.analyze(image, actions=['age'], enforce_detection=False)
-
     emotion = emotion['dominant_emotion']
-    age = age['age']
+    age = age["age"]
 
     return emotion, age
 
@@ -64,15 +64,19 @@ def main():
                 image_file = st.file_uploader("Wähle ein Bild von dir aus", type=['jpg', 'jpeg', 'png'])
                 if image_file is not None:
                     uploaded_image = Image.open(image_file)
+                    #convert PIL.Image to cv2.imread type??
                     st.text("Deine Auswahl")
                     st.image(uploaded_image)
+                    nimg = np.array(uploaded_image)
+                    cv_image = cv2.cvtColor(nimg, cv2.COLOR_RGB2BGR)
                     analyze = analyze_image(uploaded_image)
+                    age = age_detection.predict_age(cv_image)
             with col2:
                 st.header("Persönlichkeitsanalyse")
                 st.subheader("Finde dein perfektes Produkt")
                 if image_file is not None:
                     st.text(analyze[0])
-                    st.text(analyze[1])
+                    st.text(age)
 
 
     elif choice == "Live Analyse":
