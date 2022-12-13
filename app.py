@@ -1,14 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import streamlit.components.v1 as html
-from  PIL import Image
-import numpy as np
 import cv2
-import pandas as pd
-from st_aggrid import AgGrid
-import plotly.express as px
-import io
-from tempfile import NamedTemporaryFile
 from PIL import Image
 import numpy as np
 from deepface import DeepFace
@@ -39,23 +31,31 @@ def main():
         layout="wide",
     )
 
-    choice = option_menu(None, ["Über Uns", "Produktanalyse", "Live Analyse", "Alle Produkte"],
-                         icons=["person lines fill", "camera fill","camera reels", "basket"],
-                         #menu_icon="app-indicator",
-                         default_index=0,
-                         orientation="horizontal",
-                         styles={
-                             "container": {"padding": "5!important", "background-color": "#fafafa"},
-                             "icon": {"color": "#ffb166", "font-size": "25px"},
-                             "nav-link": {"font-size": "20px", "text-align": "center", "margin": "0px",
-                                          "--hover-color": "#eee"},
-                             "nav-link-selected": {"background-color": "#02ab21"},
-                         }
-                         )
+    with st.sidebar:
+        choice = option_menu(None, ["Über Uns", "Produktanalyse", "Live Analyse", "Alle Produkte"],
+                             icons=["person lines fill", "camera fill","camera-reels", "basket"],
+                             #menu_icon="app-indicator",
+                             default_index=0,
+                             styles={
+                                 "container": {"padding": "5!important", "background-color": "#fafafa"},
+                                 "icon": {"color": "#ffb166", "font-size": "25px"},
+                                 "nav-link": {"font-size": "20px", "text-align": "center", "margin": "0px",
+                                              "--hover-color": "#eee"},
+                                 "nav-link-selected": {"background-color": "#02ab21"},
+                             }
+                             )
 
+    logo = Image.open(r'C:\Users\Janika\Downloads\Uni\Data Science\Semester 3\Fallstudie\Fox_banking.png')
     if choice == "Über Uns":
-        st.header("Fox Banking")
-        st.text("Janika RULEZZZZZ")
+        col1, col2 = st.columns([0.8, 0.2])
+        with col1:  # To display the header text using css style
+            st.markdown(""" <style> .font {
+            font-size:35px ; font-family: 'Cooper Black'; color: #ffb166;} 
+            </style> """, unsafe_allow_html=True)
+            st.markdown('<p class="font">About the Creator</p>', unsafe_allow_html=True)
+        with col2:  # To display brand log
+            st.image(logo, width=130)
+
 
     elif choice == "Produktanalyse":
         with st.container():
@@ -69,12 +69,15 @@ def main():
                     st.image(uploaded_image)
                     nimg = np.array(uploaded_image)
                     cv_image = cv2.cvtColor(nimg, cv2.COLOR_RGB2BGR)
-                    analyze = analyze_image(uploaded_image)
-                    age = age_detection.predict_age(cv_image)
             with col2:
-                st.header("Persönlichkeitsanalyse")
-                st.subheader("Finde dein perfektes Produkt")
+                st.markdown(""" <style> .font {
+                                            font-size:35px ; font-family: 'Cooper Black'; color: #ffb166;} 
+                                            </style> """, unsafe_allow_html=True)
+                st.markdown('<p class="font">Persönlichkeitsanalyse</p>', unsafe_allow_html=True)
                 if image_file is not None:
+                    with st.spinner("Berechnung"):
+                        analyze = analyze_image(uploaded_image)
+                        age = age_detection.predict_age(cv_image)
                     st.text(analyze[0])
                     st.text(age)
 
