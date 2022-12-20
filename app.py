@@ -5,6 +5,8 @@ from PIL import Image
 import numpy as np
 from deepface import DeepFace
 import age_detection
+import pandas as pd
+
 # function to load image
 try:
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -31,8 +33,18 @@ def main():
         layout="wide",
     )
 
-    with st.sidebar:
-        choice = option_menu(None, ["Über Uns", "Produktanalyse", "Live Analyse", "Alle Produkte"],
+    with st.sidebar.container():
+        logo = Image.open(r'C:\Users\Janika\Downloads\Uni\Data Science\Semester 3\Fallstudie\Logo_nobg1.png')
+        cola, colb = st.columns([0.8, 0.2])
+        with cola:
+            st.markdown(""" <style> .font {
+                        font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} 
+                        </style> """, unsafe_allow_html=True)
+            st.markdown('<p class="font">Fox Banking</p>', unsafe_allow_html=True)
+        with colb:
+            st.image(logo)
+
+        choice = option_menu(None, ["Über Uns", "Produktanalyse", "Alle Produkte"],
                              icons=["person lines fill", "camera fill","camera-reels", "basket"],
                              #menu_icon="app-indicator",
                              default_index=0,
@@ -46,34 +58,36 @@ def main():
                              )
 
     logo = Image.open(r'C:\Users\Janika\Downloads\Uni\Data Science\Semester 3\Fallstudie\Fox_banking.png')
+
     if choice == "Über Uns":
         col1, col2 = st.columns([0.8, 0.2])
         with col1:  # To display the header text using css style
             st.markdown(""" <style> .font {
-            font-size:35px ; font-family: 'Cooper Black'; color: #ffb166;} 
+            font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} 
             </style> """, unsafe_allow_html=True)
-            st.markdown('<p class="font">About the Creator</p>', unsafe_allow_html=True)
+            st.markdown('<p class="font">Fox Banking</p>', unsafe_allow_html=True)
         with col2:  # To display brand log
             st.image(logo, width=130)
+        st.write(" Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. ")
 
 
     elif choice == "Produktanalyse":
         with st.container():
+            st.markdown(""" <style> .font {
+                            font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} 
+                            </style> """, unsafe_allow_html=True)
+            st.markdown('<p class="font">Finde dein perfektes Produkt</p>', unsafe_allow_html=True)
+            with st.expander("Wähle ein Bild aus!", expanded=True):
+                image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
             col1, col2 = st.columns(2)
             with col1:
-                image_file = st.file_uploader("Wähle ein Bild von dir aus", type=['jpg', 'jpeg', 'png'])
                 if image_file is not None:
                     uploaded_image = Image.open(image_file)
-                    #convert PIL.Image to cv2.imread type??
                     st.text("Deine Auswahl")
                     st.image(uploaded_image)
                     nimg = np.array(uploaded_image)
                     cv_image = cv2.cvtColor(nimg, cv2.COLOR_RGB2BGR)
             with col2:
-                st.markdown(""" <style> .font {
-                                            font-size:35px ; font-family: 'Cooper Black'; color: #ffb166;} 
-                                            </style> """, unsafe_allow_html=True)
-                st.markdown('<p class="font">Persönlichkeitsanalyse</p>', unsafe_allow_html=True)
                 if image_file is not None:
                     with st.spinner("Berechnung"):
                         analyze = analyze_image(uploaded_image)
@@ -82,24 +96,45 @@ def main():
                     st.text(age)
 
 
-    elif choice == "Live Analyse":
-        with st.container():
-            col1, col2 = st.columns(2)
-            with col1:
-                picture = st.camera_input("Nimm ein Bild auf")
-                if picture is not None:
-                    image = Image.open(picture)
-                    analyze = analyze_image(image)
-            with col2:
-                st.header("Webcam Live Analyse")
-                if picture is not None:
-                    st.text(analyze[0])
-                    st.text(analyze[1])
 
 
     elif choice == "Alle Produkte":
-        st.header("Sparbuch")
+        with st.container():
+            col1, col2 = st.columns([0.8, 0.2])
+            with col1:
+                st.markdown(""" <style> .font {
+                                            font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} 
+                                            </style> """, unsafe_allow_html=True)
+                st.markdown('<p class="font">Unsere Produkte im Überblick</p>', unsafe_allow_html=True)
+
+            with col2:
+                st.image(logo, width=130)
 
 
 if __name__ == '__main__':
 		main()
+
+
+
+
+
+
+
+# if age = (0,2) or age = (4,6) or age = (8,12) or age = (15,20):
+
+
+# (including angry, fear, neutral, sad, disgust, happy and surprise)
+# AGE_INTERVALS = ['(0, 2)', '(4, 6)', '(8, 12)', '(15, 20)',
+#                 '(25, 32)', '(38, 43)', '(48, 53)', '(60, 100)']
+
+
+
+
+
+
+
+
+
+
+
+
