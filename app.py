@@ -6,10 +6,11 @@ import numpy as np
 from deepface import DeepFace
 import age_detection
 import sqlite3 as sq
+import io
 
 
 #create SQLite Database to store feedback
-conn = sq.connect('fox_banking_feedback.db')
+conn = sq.connect('fox_banking.db')
 c = conn.cursor()
 
 def create_table():
@@ -89,7 +90,9 @@ def main():
                     image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
                 if image_file is not None:
                     uploaded_image = Image.open(image_file)
-                    photo = image_file.read()
+                    buf = io.BytesIO()
+                    uploaded_image.save(buf, format='PNG')
+                    byte_im = buf.getvalue()
                     st.text("Deine Auswahl")
                     st.image(uploaded_image)
                     nimg = np.array(uploaded_image)
@@ -157,7 +160,7 @@ def main():
 
                     if st.button("Feedback geben"):
                         create_table()
-                        add_feedback(photo, q1, q2, q3)
+                        add_feedback(byte_im, q1, q2, q3)
                         st.success("Feedback abgegeben!")
 
 
