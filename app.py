@@ -6,17 +6,17 @@ import numpy as np
 from deepface import DeepFace
 import age_detection
 import sqlite3 as sq
-import io
+
 
 #create SQLite Database to store feedback
 conn = sq.connect('fox_banking_feedback.db')
 c = conn.cursor()
 
 def create_table():
-    c.execute("CREATE TABLE IF NOT EXISTS feedback(age INTEGER, emotion TEXT, product TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS feedback(image BLOB, age INTEGER, emotion TEXT, product TEXT)")
 
-def add_feedback(age, emotion, product):
-    c.execute("INSERT INTO feedback(age, emotion, product) VALUES (?,?,?)", (age, emotion, product))
+def add_feedback(image, age, emotion, product):
+    c.execute("INSERT INTO feedback(image, age, emotion, product) VALUES (?,?,?,?)", (image, age, emotion, product))
     conn.commit()
 
 
@@ -89,6 +89,7 @@ def main():
                     image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
                 if image_file is not None:
                     uploaded_image = Image.open(image_file)
+                    photo = image_file.read()
                     st.text("Deine Auswahl")
                     st.image(uploaded_image)
                     nimg = np.array(uploaded_image)
@@ -156,7 +157,7 @@ def main():
 
                     if st.button("Feedback geben"):
                         create_table()
-                        add_feedback(q1, q2, q3)
+                        add_feedback(photo, q1, q2, q3)
                         st.success("Feedback abgegeben!")
 
 
