@@ -109,5 +109,6 @@ def predict_age(img):
         age_net.setInput(blob)
         age_preds = age_net.forward()
         i = age_preds[0].argmax()
+        global age
         age = AGE_INTERVALS[i]
         return age

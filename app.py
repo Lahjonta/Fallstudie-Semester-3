@@ -14,10 +14,10 @@ conn = sq.connect('fox_banking.db')
 c = conn.cursor()
 
 def create_table():
-    c.execute("CREATE TABLE IF NOT EXISTS feedback(image BLOB, age INTEGER, emotion TEXT, product TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS feedback(Foto BLOB, Alter_gold INTEGER, Emotion_gold TEXT, Alter_Vorhersage INTEGER, Emotion_Vorhersage TEXT, Produkt TEXT)")
 
-def add_feedback(image, age, emotion, product):
-    c.execute("INSERT INTO feedback(image, age, emotion, product) VALUES (?,?,?,?)", (image, age, emotion, product))
+def add_feedback(Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt):
+    c.execute("INSERT INTO feedback(Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt) VALUES (?,?,?,?,?,?)", (Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt))
     conn.commit()
 
 
@@ -32,12 +32,11 @@ def analyze_image(uploaded_image):
     new_image = np.array(uploaded_image.convert('RGB'))  # converting image into array
     image = cv2.cvtColor(new_image, 1)
 
-    emotion = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
-    age = DeepFace.analyze(image, actions=['age'], enforce_detection=False)
-    emotion = emotion['dominant_emotion']
-    age = age["age"]
+    em = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
+    global emotion
+    emotion = em['dominant_emotion']
 
-    return emotion, age
+    return emotion
 
 def main():
     st.set_page_config(
@@ -97,6 +96,7 @@ def main():
                     st.image(uploaded_image)
                     nimg = np.array(uploaded_image)
                     cv_image = cv2.cvtColor(nimg, cv2.COLOR_RGB2BGR)
+
         with col2:
             cola, colb, colc = st.columns(3)
             with colc:
@@ -104,19 +104,17 @@ def main():
             with col4:
                 if image_file is not None:
                     with st.spinner("Berechnung"):
-                        analyze = analyze_image(uploaded_image)
+                        emotion = analyze_image(uploaded_image)
                         age = age_detection.predict_age(cv_image)
                     if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
-                        if (analyze[0] == 'happy' or analyze[0] == 'neutral'):
-                            product = Image.open(r'C:\Users\Janika\Downloads\Uni\Data Science\Semester 3\Fallstudie\Projekt Emotionenerkennung Bank\Produkte\Produktbeschreibung_12.jpg')
-                            st.image(product)
+                        if (emotion == 'happy'):
                             st.markdown('<p class="font">Dein Produkt: Sparbuch</p>', unsafe_allow_html=True)
                             st.markdown('<p class="sub">Was ist ein Sparbuch?</p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Das Sparbuch ist ein sehr sicheres, klassisches Sparprodukt von Fox Banking. </p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Du kannst jederzeit in das Sparbuch einzahlen. </p>', unsafe_allow_html=True)
                             st.markdown('<p class="main">  Die Anlage eines Sparbuches ist gebührenfrei. </p>', unsafe_allow_html=True)
 
-                        if (analyze[0] == 'angry' or analyze[0] == 'disgust'):
+                        if (emotion == 'angry' or emotion == 'disgust'):
                             st.markdown('<p class="font">Dein Produkt: Bausparvertrag</p>', unsafe_allow_html=True)
                             st.markdown('<p class="sub">Was ist ein Bausparvertrag?</p>', unsafe_allow_html=True)
                             st.markdown('<p class="main">  Ein Bausparvertrag funktioniert in der Sparphase genau wie ein Sparbuch. Nur kann man in der Darlehensphase, die viel später eintritt, sich einen Zins beim Abschluss des Bausparvertrags sichern.</p>', unsafe_allow_html=True)
@@ -125,32 +123,30 @@ def main():
                             st.markdown('<p class="sub">Was ist die Darlehensphase?</p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> In der Darlehensphase erhälts Du ein vorher vereinbartes Darlehen zu einem Zins, der beim Abschluss des Bausparvertrags vereinbart wurde. </p>', unsafe_allow_html=True)
 
-                        if (analyze[0] == 'sad'):
+                        if (emotion == 'sad'):
                             st.markdown('<p class="font">Dein Produkt: Katastrophenschutz</p>', unsafe_allow_html=True)
                             st.markdown('<p class="sub">Was ist der Katastrophenschutz?</p>', unsafe_allow_html=True)
                             st.markdown('<p class="main">  Der Katastrophenschutz sichert die finanzielle Auswirkung von Naturkatastrophen, wie Überschwemmungen, Erdbeben oder Stürme ab. Das können Schäden an Immobilien und anderen Besitztümern sein.</p>', unsafe_allow_html=True)
                             st.markdown('<p class="sub">   Warum gilt Sie als Zusatzversicherung zur Hausrat- oder Wohngebäudeversicherung?</p>', unsafe_allow_html=True)
                             st.markdown('<p class="main">  Naturkatastrophen sind in der genannten Versicherung nicht gesichert. Durch den Zusatzcharakter ist die Versicherung deutliche günstiger als die Hausrat- oder Wohngebäudeversicherung.</p>', unsafe_allow_html=True)
 
-                        if (analyze[0] == 'neutral'):
+                        if (emotion == 'neutral'):
                             st.markdown('<p class="font">Dein Produkt: Werbegeschenk</p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Wenn Du jünger als 21 Jahre bist, erhältst Du, nach einer Einzahlung in Dein Sparbuch ein Werbegeschenk in einem Wert von bis zu 5€! </p>', unsafe_allow_html=True)
 
-                        if (analyze[0] == 'fear' or analyze[0] == 'surprise'):
+                        if (emotion == 'fear' or emotion == 'surprise'):
                             st.markdown('<p class="font">Dein Produkt: Mitgliedschaft </p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Als Mitglied und Anteilseigner hast Du ein Stimmrecht bei der Generalversammlung oder bei der Vertreterwahl. Dabei gilt: ein Mitglied, eine Stimme – unabhängig davon, wie viele Geschäftsanteile Du besitzen.</p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Du bist dann auch am wirtschaftlichen Erfolg der Fox Bank beteiligt. Du erhältst in der Regel einmal jährliche eine Rendite. Außerdem profitierst Du von exklusiven Mitgliedervorteilen. </p>', unsafe_allow_html=True)
 
                     if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
-                        if (analyze[0] == 'happy' or analyze[0] == 'neutral'):
+                        if (emotion == 'happy'):
                             st.markdown('<p class="font">Dein Produkt: Girokonto </p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Hier findest Du das passende Girokonto für Dich: </p>', unsafe_allow_html=True)
-
                             st.markdown('<p class="main"> </p>', unsafe_allow_html=True)
-
-                    st.text(analyze[0])
-                    st.text(age)
-
+                    st.write("")
+                    st.write("")
+                    st.write("")
                     #Feedback form for users
                     st.markdown('<p class="sub">Möchtest Du Feedback geben?</p>', unsafe_allow_html=True)
                     q1 = st.number_input("Wie alt bist Du?", min_value=0, max_value=120)
@@ -160,8 +156,50 @@ def main():
 
                     if st.button("Feedback geben"):
                         create_table()
-                        add_feedback(byte_im, q1, q2, q3)
+                        if emotion == 'happy':
+                            x = 'glücklich'
+                        elif emotion == 'angry':
+                            x = 'wütend'
+                        elif emotion == 'disgust':
+                            x = 'angeekelt'
+                        elif emotion == 'sad':
+                            x = 'traurig'
+                        elif emotion == 'neutral':
+                            x = 'neutral'
+                        elif emotion == 'fear':
+                            x = 'ängstlich'
+                        elif emotion == 'surprised':
+                            x = 'überrascht'
+                        add_feedback(byte_im, q1, q2, age, x, q3)
                         st.success("Feedback abgegeben!")
+
+        with col1:
+            with col3:
+                if image_file is not None:
+                    if emotion == 'happy':
+                        x = 'glücklich'
+                    elif emotion == 'angry':
+                        x = 'wütend'
+                    elif emotion == 'disgust':
+                        x = 'angeekelt'
+                    elif emotion == 'sad':
+                        x = 'traurig'
+                    elif emotion == 'neutral':
+                        x = 'neutral'
+                    elif emotion == 'fear':
+                        x = 'ängstlich'
+                    elif emotion == 'surprised':
+                        x = 'überrascht'
+
+                    if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
+                        a = 'ein Kind'
+                    if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
+                        a = 'Erwachsen'
+                    if (age == '(60, 100'):
+                        a = 'eine ältere Person'
+                    st.markdown('<p class="main">Laut unserer Bildanalyse bist du {} und {}. </p>'.format(x, a), unsafe_allow_html=True)
+
+
 
 
     elif choice == "Alle Produkte":
