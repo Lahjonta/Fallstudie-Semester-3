@@ -163,7 +163,7 @@ def main():
                             st.markdown('<p class="sub">Regelmäßig sparen </p>', unsafe_allow_html=True)
                             st.markdown('<p class="main">Mit Beträgen zwischen mindestens 25 Euro und maximal 250 Euro kannst du regelmäßig in dieses Programm einzahlen. </p>', unsafe_allow_html=True)
                             st.markdown('<p class="sub">Keine Gebühren </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">Dieses Konto ist bis zum 18.ten Geburtstag deines Enkels kostenfrei. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">Dieses Konto ist bis zum 18. Geburtstag deines Enkels kostenfrei. </p>', unsafe_allow_html=True)
                             SparTable = pd.read_csv("EnkelSparen.txt", sep="\t")
                             hide_table_row_index = """
                             <style>
