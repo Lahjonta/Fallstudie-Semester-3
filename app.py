@@ -7,6 +7,7 @@ from deepface import DeepFace
 import age_detection
 import sqlite3 as sq
 import io
+import pandas as pd
 
 
 #create SQLite Database to store feedback
@@ -49,7 +50,7 @@ def main():
     st.markdown(""" <style> .sub { font-size:25px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
 
     with st.sidebar.container():
-        logo = Image.open(r'C:\Users\Janika\Downloads\Uni\Data Science\Semester 3\Fallstudie\Logo_nobg1.png')
+        logo = Image.open(r'Logo_nobg1.png')
         cola, colb = st.columns([0.8, 0.2])
         with cola:
             st.markdown('<p class="font">Fox Banking</p>', unsafe_allow_html=True)
@@ -69,7 +70,7 @@ def main():
                              }
                              )
 
-    logo = Image.open(r'C:\Users\Janika\Downloads\Uni\Data Science\Semester 3\Fallstudie\Fox_banking.png')
+    logo = Image.open(r'Fox_banking.png')
 
     if choice == "Über Uns":
         col1, col2 = st.columns([0.8, 0.2])
@@ -143,7 +144,17 @@ def main():
                         if (emotion == 'happy'):
                             st.markdown('<p class="font">Dein Produkt: Girokonto </p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Hier findest Du das passende Girokonto für Dich: </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> </p>', unsafe_allow_html=True)
+                            gTable = pd.read_csv("Girokonto.txt", sep="\t")
+                            # CSS to inject contained in a string
+                            hide_table_row_index = """
+                            <style>
+                            thead tr th:first-child {display:none}
+                            tbody th {display:none}
+                            </style>
+                            """
+                            # Inject CSS with Markdown
+                            st.markdown(hide_table_row_index, unsafe_allow_html=True)
+                            st.table(gTable)
                     st.write("")
                     st.write("")
                     st.write("")
