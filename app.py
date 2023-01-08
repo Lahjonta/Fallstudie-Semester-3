@@ -155,6 +155,24 @@ def main():
                             # Inject CSS with Markdown
                             st.markdown(hide_table_row_index, unsafe_allow_html=True)
                             st.table(gTable)
+                    if (age == '(60, 100)'):
+                        if (emotion == 'happy'):
+                            st.markdown('<p class="font">Dein Produkt: Für die Enkel sparen </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Sorge für deine Liebsten vor </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">Speziell für Neu¬geborene und Kinder bis 8 Jahre gibt es das Enkelsparprogramm. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Regelmäßig sparen </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">Mit Beträgen zwischen mindestens 25 Euro und maximal 250 Euro kannst du regelmäßig in dieses Programm einzahlen. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Keine Gebühren </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">Dieses Konto ist bis zum 18.ten Geburtstag deines Enkels kostenfrei. </p>', unsafe_allow_html=True)
+                            SparTable = pd.read_csv("EnkelSparen.txt", sep="\t")
+                            hide_table_row_index = """
+                            <style>
+                            thead tr th:first-child {display:none}
+                            tbody th {display:none}
+                            </style>
+                            """
+                            st.markdown(hide_table_row_index, unsafe_allow_html=True)
+                            st.table(SparTable)
                     st.write("")
                     st.write("")
                     st.write("")

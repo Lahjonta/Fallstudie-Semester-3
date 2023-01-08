@@ -1,0 +1,5 @@
+"Konditionen"	" "
+"Vertragslaufzeit"	"Zwischen 12 und 18 Jahren"
+"Abschlusszeit"	"Ab 0 Jahre bis vor dem 8. Geburtstag"
+"Sparraten"	"Monatlich ab 25€ bis max. 250€"
+"Verzinsung"	"2% p.a."
