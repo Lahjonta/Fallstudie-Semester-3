@@ -50,7 +50,7 @@ def main():
     st.markdown(""" <style> .sub { font-size:25px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
 
     with st.sidebar.container():
-        logo = Image.open(r'Logo_nobg1.png')
+        logo = Image.open('Logo_nobg1.png')
         cola, colb = st.columns([0.8, 0.2])
         with cola:
             st.markdown('<p class="font">Fox Banking</p>', unsafe_allow_html=True)
@@ -70,7 +70,7 @@ def main():
                              }
                              )
 
-    logo = Image.open(r'Fox_banking.png')
+    logo = Image.open('Fox_banking.png')
 
     if choice == "Über Uns":
         col1, col2 = st.columns([0.8, 0.2])
@@ -224,7 +224,7 @@ def main():
                         a = 'ein Kind'
                     if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
                         a = 'Erwachsen'
-                    if (age == '(60, 100'):
+                    if (age == '(60, 100)'):
                         a = 'eine ältere Person'
                     st.markdown('<p class="main">Laut unserer Bildanalyse bist du {} und {}. </p>'.format(x, a), unsafe_allow_html=True)
 
