@@ -145,16 +145,36 @@ def main():
                             st.markdown('<p class="font">Dein Produkt: Girokonto </p>', unsafe_allow_html=True)
                             st.markdown('<p class="main"> Hier findest Du das passende Girokonto für Dich: </p>', unsafe_allow_html=True)
                             gTable = pd.read_csv("Girokonto.txt", sep="\t")
-                            # CSS to inject contained in a string
                             hide_table_row_index = """
                             <style>
                             thead tr th:first-child {display:none}
                             tbody th {display:none}
                             </style>
                             """
-                            # Inject CSS with Markdown
                             st.markdown(hide_table_row_index, unsafe_allow_html=True)
                             st.table(gTable)
+
+                        if (emotion == 'angry' or emotion == 'disgust'):
+                            st.markdown('<p class="font">Dein Produkt: Kredit</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Warum ein Kredit bei der Fox Bank </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Wir unterstützen dich mit unseren individuellen Krediten dabei, größere Anschaffungen zu realisieren und deine Wünsche Wirklichkeit werden zu lassen – egal, ob eine neue Einrichtung, ein größeres Auto oder eine neue Wohnung. Mit unserem Kreditrechner berechnest du direkt online die monatliche Rate für deinen Wunschkredit. </p>', unsafe_allow_html=True)
+                        
+                        if (emotion == 'sad'):
+                            st.markdown('<p class="font">Dein Produkt: Lebensversicherung</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Was ist eine Lebensversicherung?</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Die Lebensversicherung dient an erster Stelle als Hinterbliebenschutz. Falls der Todesfall des Versicherten eintritt, wird den Hinterbliebenen eine vereinbarte Summe ausgezahlt. </p>', unsafe_allow_html=True)
+                        
+                        if (emotion == 'neutral'):
+                            st.markdown('<p class="font">Dein Produkt: Aktien</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Wenn du auf der Suche nach einer renditestarken Anlage sind und bereit sind, ein Risiko einzugehen, sind Aktien sicher von Interesse für dich. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Die Fox Bank hat hochqualifizierte Wertpapier-SpezialistInnen, die dich gerne über die Aktien beraten möchte. </p>', unsafe_allow_html=True)
+
+                        if (emotion == 'fear' or emotion == 'surprise'):
+                            st.markdown('<p class="font">Dein Produkt: Berufsunfähigkeitsversicherung</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Was ist die Berufsunfähigkeitsversicherung? </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Wenn du arbeitsunfähig wirst und deinen Beruf aus gesundheitlichen Gründen nicht mehr ausüben können, kannst du deinen Lebensstandard nicht mehr aufrechterhalten, weil dir das Einkommen fehlt. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Die Berufsunfähigkeitsversicherung leistet dir dann monatlichen einen Beitrag, um diese Lücke zu schließen, falls die Arbeitsunfähigkeit eintritt. </p>', unsafe_allow_html=True)
+
                     if (age == '(60, 100)'):
                         if (emotion == 'happy'):
                             st.markdown('<p class="font">Dein Produkt: Für die Enkel sparen </p>', unsafe_allow_html=True)
@@ -173,6 +193,36 @@ def main():
                             """
                             st.markdown(hide_table_row_index, unsafe_allow_html=True)
                             st.table(SparTable)
+
+                        if (emotion == 'angry' or emotion == 'disgust'):
+                            st.markdown('<p class="font">Dein Produkt: Rechtsschutzversicherung</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Was ist eine Rechtsschutzversicherung? </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Deckt Kosten für rechtliche Auseinandersetzungen ab</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Z.B Kosten für das Gerichtsverfahren oder Anwaltskosten </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Gebühren: Angebote schon für 10€ im Monat</p>', unsafe_allow_html=True)
+                       
+                        if (emotion == 'sad'):
+                            st.markdown('<p class="font">Dein Produkt: Vermögensberatung</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Was ist eine Vermögensberatung?</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Optimierung und Analyse von Vermögenswerten </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Buche einen Termin mit deine(r) BeraterIn und hole ein unverbindliches Angebot</p>', unsafe_allow_html=True)
+                        
+                        if (emotion == 'neutral'):
+                            st.markdown('<p class="font">Dein Produkt: Gewinnsparen</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Wie funktioniert Gewinnsparen? </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Clevere Kombination aus Gewinnen, Sparen und Helfen </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Der monatliche Los Preis beträgt 5€, wobei 4€ gespart werden. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Was kann ich gewinnen?</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Mit dem einem Euro nimmst du an der Verlosung teil. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Neben attraktiven Geldpreisen werden auch Sachpreise wie zum Beispiel Autos und Reisen verlost. </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Was ist eine Soziallotterie? </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Je Los fließen pro Monat 25 Cent an gemeinnützige Zwecke </p>', unsafe_allow_html=True)
+                        
+                        if (emotion == 'fear' or emotion == 'surprise'):
+                            st.markdown('<p class="font">Dein Produkt: Sterbegeld</p>', unsafe_allow_html=True)
+                            st.markdown('<p class="sub">Was ist die Sterbegeldversicherung? </p>', unsafe_allow_html=True)
+                            st.markdown('<p class="main">  Im Todesfall eines Versicherten wird eine festgelegte Summe an den Hinterbliebenen ausgezahlt. Diese Auszahlung soll die Bestattungskosten decken. </p>', unsafe_allow_html=True)
+                            
                     st.write("")
                     st.write("")
                     st.write("")
