@@ -80,11 +80,16 @@ def main():
             st.image(logo, width=130)
         st.markdown('<p class="main" >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', unsafe_allow_html=True)
 
+
     elif choice == "Produktanalyse":
         col1, col2 = st.columns(2)
         col3, col4 = st.columns(2)
         with col1:
             st.markdown('<p class="font">Finde dein perfektes Produkt</p>', unsafe_allow_html=True)
+            st.markdown('<p class="main">Keine Lust mehr auf Berater die dir Produkte verkaufen wollen, die gar nicht zu dir passen? </p>', unsafe_allow_html=True)
+            st.markdown('<p class="main">Unser selbst entwickeltes Analysetool bietet dir perfekt passende Produkte an, indem es dein Alter und deine Emotion analysiert. Ganz ohne nervige Beratergespräche.</p>', unsafe_allow_html=True)
+            st.markdown('<p class="main">Lade hierfür einfach ein Bild von dir hoch und lass es analysieren:</p>', unsafe_allow_html=True)
+
             with col3:
                 with st.expander("Wähle ein Bild aus!", expanded=False):
                     image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
