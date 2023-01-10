@@ -39,6 +39,171 @@ def analyze_image(uploaded_image):
 
     return emotion
 
+#products
+def sparbuch():
+    st.markdown('<p class="font">Dein Produkt: Sparbuch</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist ein Sparbuch?</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main"> Das Sparbuch ist ein sehr sicheres, klassisches Sparprodukt von Fox Banking. </p>',
+        unsafe_allow_html=True)
+    st.markdown('<p class="main"> Du kannst jederzeit in das Sparbuch einzahlen. </p>', unsafe_allow_html=True)
+    st.markdown('<p class="main">  Die Anlage eines Sparbuches ist gebührenfrei. </p>', unsafe_allow_html=True)
+
+def bausparvertrag():
+    st.markdown('<p class="font">Dein Produkt: Bausparvertrag</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist ein Bausparvertrag?</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Ein Bausparvertrag funktioniert in der Sparphase genau wie ein Sparbuch. Nur kann man in der Darlehensphase, die viel später eintritt, sich einen Zins beim Abschluss des Bausparvertrags sichern.</p>',
+        unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist die Bausparphase?</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main"> In der Bausparphase spart man so lange ein, bis ein vereinbarter Mindestbetrag eingezahlt wurde. Die Beiträge in den Bausparvertrag werden, wie in einem Sparbuch auch, verzinst angelegt. Wenn der Bausparvertrag zuteilungsreif ist, ist die Bausparkasse verpflichtet, Dir die vorher vereinbarte Darlehenssumme auszuzahlen, die Du nicht in Anspruch nehmen musst. </p>',
+        unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist die Darlehensphase?</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main"> In der Darlehensphase erhälts Du ein vorher vereinbartes Darlehen zu einem Zins, der beim Abschluss des Bausparvertrags vereinbart wurde. </p>',
+        unsafe_allow_html=True)
+
+def katastrophenschutz():
+    st.markdown('<p class="font">Dein Produkt: Katastrophenschutz</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist der Katastrophenschutz?</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Der Katastrophenschutz sichert die finanzielle Auswirkung von Naturkatastrophen, wie Überschwemmungen, Erdbeben oder Stürme ab. Das können Schäden an Immobilien und anderen Besitztümern sein.</p>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<p class="sub">   Warum gilt Sie als Zusatzversicherung zur Hausrat- oder Wohngebäudeversicherung?</p>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Naturkatastrophen sind in der genannten Versicherung nicht gesichert. Durch den Zusatzcharakter ist die Versicherung deutliche günstiger als die Hausrat- oder Wohngebäudeversicherung.</p>',
+        unsafe_allow_html=True)
+
+def werbegeschenk():
+    st.markdown('<p class="font">Dein Produkt: Werbegeschenk</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main"> Wenn Du jünger als 21 Jahre bist, erhältst Du, nach einer Einzahlung in Dein Sparbuch ein Werbegeschenk in einem Wert von bis zu 5€! </p>',
+        unsafe_allow_html=True)
+
+def mitgliedschaft():
+    st.markdown('<p class="font">Dein Produkt: Mitgliedschaft </p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main"> Als Mitglied und Anteilseigner hast Du ein Stimmrecht bei der Generalversammlung oder bei der Vertreterwahl. Dabei gilt: ein Mitglied, eine Stimme – unabhängig davon, wie viele Geschäftsanteile Du besitzen.</p>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main"> Du bist dann auch am wirtschaftlichen Erfolg der Fox Bank beteiligt. Du erhältst in der Regel einmal jährliche eine Rendite. Außerdem profitierst Du von exklusiven Mitgliedervorteilen. </p>',
+        unsafe_allow_html=True)
+
+def girokonto():
+    st.markdown('<p class="font">Dein Produkt: Girokonto </p>', unsafe_allow_html=True)
+    st.markdown('<p class="main"> Hier findest Du das passende Girokonto für Dich: </p>',
+                unsafe_allow_html=True)
+    gTable = pd.read_csv("Girokonto.txt", sep="\t")
+    hide_table_row_index = """
+    <style>
+    thead tr th:first-child {display:none}
+    tbody th {display:none}
+    </style>
+    """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    st.table(gTable)
+
+def kredit():
+    st.markdown('<p class="font">Dein Produkt: Kredit</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Warum ein Kredit bei der Fox Bank </p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Wir unterstützen dich mit unseren individuellen Krediten dabei, größere Anschaffungen zu realisieren und deine Wünsche Wirklichkeit werden zu lassen – egal, ob eine neue Einrichtung, ein größeres Auto oder eine neue Wohnung. Mit unserem Kreditrechner berechnest du direkt online die monatliche Rate für deinen Wunschkredit. </p>',
+        unsafe_allow_html=True)
+
+def lebensversicherung():
+    st.markdown('<p class="font">Dein Produkt: Lebensversicherung</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist eine Lebensversicherung?</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Die Lebensversicherung dient an erster Stelle als Hinterbliebenschutz. Falls der Todesfall des Versicherten eintritt, wird den Hinterbliebenen eine vereinbarte Summe ausgezahlt. </p>',
+        unsafe_allow_html=True)
+
+def aktien():
+    st.markdown('<p class="font">Dein Produkt: Aktien</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Wenn du auf der Suche nach einer renditestarken Anlage sind und bereit sind, ein Risiko einzugehen, sind Aktien sicher von Interesse für dich. </p>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Die Fox Bank hat hochqualifizierte Wertpapier-SpezialistInnen, die dich gerne über die Aktien beraten möchte. </p>',
+        unsafe_allow_html=True)
+
+def bu():
+    st.markdown('<p class="font">Dein Produkt: Berufsunfähigkeitsversicherung</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist die Berufsunfähigkeitsversicherung? </p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Wenn du arbeitsunfähig wirst und deinen Beruf aus gesundheitlichen Gründen nicht mehr ausüben können, kannst du deinen Lebensstandard nicht mehr aufrechterhalten, weil dir das Einkommen fehlt. </p>',
+        unsafe_allow_html=True)
+    st.markdown(
+        '<p class="sub">Die Berufsunfähigkeitsversicherung leistet dir dann monatlichen einen Beitrag, um diese Lücke zu schließen, falls die Arbeitsunfähigkeit eintritt. </p>',
+        unsafe_allow_html=True)
+
+def enkel():
+    st.markdown('<p class="font">Dein Produkt: Für die Enkel sparen </p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Sorge für deine Liebsten vor </p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">Speziell für Neugeborene und Kinder bis 8 Jahre gibt es das Enkelsparprogramm. </p>',
+        unsafe_allow_html=True)
+    st.markdown('<p class="sub">Regelmäßig sparen </p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">Mit Beträgen zwischen mindestens 25 Euro und maximal 250 Euro kannst du regelmäßig in dieses Programm einzahlen. </p>',
+        unsafe_allow_html=True)
+    st.markdown('<p class="sub">Keine Gebühren </p>', unsafe_allow_html=True)
+    st.markdown('<p class="main">Dieses Konto ist bis zum 18. Geburtstag deines Enkels kostenfrei. </p>',
+                unsafe_allow_html=True)
+    SparTable = pd.read_csv("EnkelSparen.txt", sep="\t")
+    hide_table_row_index = """
+    <style>
+    thead tr th:first-child {display:none}
+    tbody th {display:none}
+    </style>
+    """
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    st.table(SparTable)
+
+def rechtsschutz():
+    st.markdown('<p class="font">Dein Produkt: Rechtsschutzversicherung</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist eine Rechtsschutzversicherung? </p>', unsafe_allow_html=True)
+    st.markdown('<p class="main">  Deckt Kosten für rechtliche Auseinandersetzungen ab</p>',
+                unsafe_allow_html=True)
+    st.markdown('<p class="main">  Z.B Kosten für das Gerichtsverfahren oder Anwaltskosten </p>',
+                unsafe_allow_html=True)
+    st.markdown('<p class="sub">Gebühren: Angebote schon für 10€ im Monat</p>', unsafe_allow_html=True)
+
+
+def vermögen():
+    st.markdown('<p class="font">Dein Produkt: Vermögensberatung</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist eine Vermögensberatung?</p>', unsafe_allow_html=True)
+    st.markdown('<p class="main">  Optimierung und Analyse von Vermögenswerten </p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="sub">Buche einen Termin mit deine(r) BeraterIn und hole ein unverbindliches Angebot</p>',
+        unsafe_allow_html=True)
+
+def gewinnsparen():
+    st.markdown('<p class="font">Dein Produkt: Gewinnsparen</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Wie funktioniert Gewinnsparen? </p>', unsafe_allow_html=True)
+    st.markdown('<p class="main">  Clevere Kombination aus Gewinnen, Sparen und Helfen </p>',
+                unsafe_allow_html=True)
+    st.markdown('<p class="main">  Der monatliche Los Preis beträgt 5€, wobei 4€ gespart werden. </p>',
+                unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was kann ich gewinnen?</p>', unsafe_allow_html=True)
+    st.markdown('<p class="main">  Mit dem einem Euro nimmst du an der Verlosung teil. </p>',
+                unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Neben attraktiven Geldpreisen werden auch Sachpreise wie zum Beispiel Autos und Reisen verlost. </p>',
+        unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist eine Soziallotterie? </p>', unsafe_allow_html=True)
+    st.markdown('<p class="main">  Je Los fließen pro Monat 25 Cent an gemeinnützige Zwecke </p>',
+                unsafe_allow_html=True)
+
+def sterbegeld():
+    st.markdown('<p class="font">Dein Produkt: Sterbegeld</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub">Was ist die Sterbegeldversicherung? </p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="main">  Im Todesfall eines Versicherten wird eine festgelegte Summe an den Hinterbliebenen ausgezahlt. Diese Auszahlung soll die Bestattungskosten decken. </p>',
+        unsafe_allow_html=True)
+
 def main():
     st.set_page_config(
         page_title="Fox Banking",
@@ -57,9 +222,8 @@ def main():
         with colb:
             st.image(logo)
 
-        choice = option_menu(None, ["Produktanalyse", "Alle Produkte", "Über Uns"],
+        choice = option_menu(None, ["Über Uns", "Produktanalyse", "Alle Produkte"],
                              icons=["camera fill", "basket", "person lines fill"],
-                             #menu_icon="app-indicator",
                              default_index=0,
                              styles={
                                  "container": {"padding": "5!important", "background-color": "#fafafa"},
@@ -91,6 +255,16 @@ def main():
             st.markdown('<p class="main">Lade hierfür einfach ein Bild von dir hoch und lass es analysieren:</p>', unsafe_allow_html=True)
 
             with col3:
+                st.markdown(
+                    """
+                <style>
+                .streamlit-expanderHeader {
+                    font-size:20px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;
+                }
+                </style>
+                """,
+                    unsafe_allow_html=True,
+                )
                 with st.expander("Wähle ein Bild aus!", expanded=False):
                     image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
                 if image_file is not None:
@@ -114,120 +288,52 @@ def main():
                         age = age_detection.predict_age(cv_image)
                     if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
                         if (emotion == 'happy'):
-                            st.markdown('<p class="font">Dein Produkt: Sparbuch</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist ein Sparbuch?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> Das Sparbuch ist ein sehr sicheres, klassisches Sparprodukt von Fox Banking. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> Du kannst jederzeit in das Sparbuch einzahlen. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Die Anlage eines Sparbuches ist gebührenfrei. </p>', unsafe_allow_html=True)
+                            sparbuch()
 
                         if (emotion == 'angry' or emotion == 'disgust'):
-                            st.markdown('<p class="font">Dein Produkt: Bausparvertrag</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist ein Bausparvertrag?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Ein Bausparvertrag funktioniert in der Sparphase genau wie ein Sparbuch. Nur kann man in der Darlehensphase, die viel später eintritt, sich einen Zins beim Abschluss des Bausparvertrags sichern.</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist die Bausparphase?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> In der Bausparphase spart man so lange ein, bis ein vereinbarter Mindestbetrag eingezahlt wurde. Die Beiträge in den Bausparvertrag werden, wie in einem Sparbuch auch, verzinst angelegt. Wenn der Bausparvertrag zuteilungsreif ist, ist die Bausparkasse verpflichtet, Dir die vorher vereinbarte Darlehenssumme auszuzahlen, die Du nicht in Anspruch nehmen musst. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist die Darlehensphase?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> In der Darlehensphase erhälts Du ein vorher vereinbartes Darlehen zu einem Zins, der beim Abschluss des Bausparvertrags vereinbart wurde. </p>', unsafe_allow_html=True)
+                           bausparvertrag()
 
                         if (emotion == 'sad'):
-                            st.markdown('<p class="font">Dein Produkt: Katastrophenschutz</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist der Katastrophenschutz?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Der Katastrophenschutz sichert die finanzielle Auswirkung von Naturkatastrophen, wie Überschwemmungen, Erdbeben oder Stürme ab. Das können Schäden an Immobilien und anderen Besitztümern sein.</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">   Warum gilt Sie als Zusatzversicherung zur Hausrat- oder Wohngebäudeversicherung?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Naturkatastrophen sind in der genannten Versicherung nicht gesichert. Durch den Zusatzcharakter ist die Versicherung deutliche günstiger als die Hausrat- oder Wohngebäudeversicherung.</p>', unsafe_allow_html=True)
+                            katastrophenschutz()
 
                         if (emotion == 'neutral'):
-                            st.markdown('<p class="font">Dein Produkt: Werbegeschenk</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> Wenn Du jünger als 21 Jahre bist, erhältst Du, nach einer Einzahlung in Dein Sparbuch ein Werbegeschenk in einem Wert von bis zu 5€! </p>', unsafe_allow_html=True)
+                            werbegeschenk()
 
                         if (emotion == 'fear' or emotion == 'surprise'):
-                            st.markdown('<p class="font">Dein Produkt: Mitgliedschaft </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> Als Mitglied und Anteilseigner hast Du ein Stimmrecht bei der Generalversammlung oder bei der Vertreterwahl. Dabei gilt: ein Mitglied, eine Stimme – unabhängig davon, wie viele Geschäftsanteile Du besitzen.</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> Du bist dann auch am wirtschaftlichen Erfolg der Fox Bank beteiligt. Du erhältst in der Regel einmal jährliche eine Rendite. Außerdem profitierst Du von exklusiven Mitgliedervorteilen. </p>', unsafe_allow_html=True)
+                            mitgliedschaft()
 
                     if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
                         if (emotion == 'happy'):
-                            st.markdown('<p class="font">Dein Produkt: Girokonto </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main"> Hier findest Du das passende Girokonto für Dich: </p>', unsafe_allow_html=True)
-                            gTable = pd.read_csv("Girokonto.txt", sep="\t")
-                            hide_table_row_index = """
-                            <style>
-                            thead tr th:first-child {display:none}
-                            tbody th {display:none}
-                            </style>
-                            """
-                            st.markdown(hide_table_row_index, unsafe_allow_html=True)
-                            st.table(gTable)
+                            girokonto()
 
                         if (emotion == 'angry' or emotion == 'disgust'):
-                            st.markdown('<p class="font">Dein Produkt: Kredit</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Warum ein Kredit bei der Fox Bank </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Wir unterstützen dich mit unseren individuellen Krediten dabei, größere Anschaffungen zu realisieren und deine Wünsche Wirklichkeit werden zu lassen – egal, ob eine neue Einrichtung, ein größeres Auto oder eine neue Wohnung. Mit unserem Kreditrechner berechnest du direkt online die monatliche Rate für deinen Wunschkredit. </p>', unsafe_allow_html=True)
-                        
+                            kredit()
+
                         if (emotion == 'sad'):
-                            st.markdown('<p class="font">Dein Produkt: Lebensversicherung</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist eine Lebensversicherung?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Die Lebensversicherung dient an erster Stelle als Hinterbliebenschutz. Falls der Todesfall des Versicherten eintritt, wird den Hinterbliebenen eine vereinbarte Summe ausgezahlt. </p>', unsafe_allow_html=True)
-                        
+                            lebensversicherung()
+
                         if (emotion == 'neutral'):
-                            st.markdown('<p class="font">Dein Produkt: Aktien</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Wenn du auf der Suche nach einer renditestarken Anlage sind und bereit sind, ein Risiko einzugehen, sind Aktien sicher von Interesse für dich. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Die Fox Bank hat hochqualifizierte Wertpapier-SpezialistInnen, die dich gerne über die Aktien beraten möchte. </p>', unsafe_allow_html=True)
+                            aktien()
 
                         if (emotion == 'fear' or emotion == 'surprise'):
-                            st.markdown('<p class="font">Dein Produkt: Berufsunfähigkeitsversicherung</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist die Berufsunfähigkeitsversicherung? </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Wenn du arbeitsunfähig wirst und deinen Beruf aus gesundheitlichen Gründen nicht mehr ausüben können, kannst du deinen Lebensstandard nicht mehr aufrechterhalten, weil dir das Einkommen fehlt. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Die Berufsunfähigkeitsversicherung leistet dir dann monatlichen einen Beitrag, um diese Lücke zu schließen, falls die Arbeitsunfähigkeit eintritt. </p>', unsafe_allow_html=True)
+                            bu()
 
                     if (age == '(60, 100)'):
                         if (emotion == 'happy'):
-                            st.markdown('<p class="font">Dein Produkt: Für die Enkel sparen </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Sorge für deine Liebsten vor </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">Speziell für Neu¬geborene und Kinder bis 8 Jahre gibt es das Enkelsparprogramm. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Regelmäßig sparen </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">Mit Beträgen zwischen mindestens 25 Euro und maximal 250 Euro kannst du regelmäßig in dieses Programm einzahlen. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Keine Gebühren </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">Dieses Konto ist bis zum 18. Geburtstag deines Enkels kostenfrei. </p>', unsafe_allow_html=True)
-                            SparTable = pd.read_csv("EnkelSparen.txt", sep="\t")
-                            hide_table_row_index = """
-                            <style>
-                            thead tr th:first-child {display:none}
-                            tbody th {display:none}
-                            </style>
-                            """
-                            st.markdown(hide_table_row_index, unsafe_allow_html=True)
-                            st.table(SparTable)
+                            enkel()
 
                         if (emotion == 'angry' or emotion == 'disgust'):
-                            st.markdown('<p class="font">Dein Produkt: Rechtsschutzversicherung</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist eine Rechtsschutzversicherung? </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Deckt Kosten für rechtliche Auseinandersetzungen ab</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Z.B Kosten für das Gerichtsverfahren oder Anwaltskosten </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Gebühren: Angebote schon für 10€ im Monat</p>', unsafe_allow_html=True)
-                       
+                            rechtsschutz()
+
                         if (emotion == 'sad'):
-                            st.markdown('<p class="font">Dein Produkt: Vermögensberatung</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist eine Vermögensberatung?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Optimierung und Analyse von Vermögenswerten </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Buche einen Termin mit deine(r) BeraterIn und hole ein unverbindliches Angebot</p>', unsafe_allow_html=True)
-                        
+                            vermögen()
+
                         if (emotion == 'neutral'):
-                            st.markdown('<p class="font">Dein Produkt: Gewinnsparen</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Wie funktioniert Gewinnsparen? </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Clevere Kombination aus Gewinnen, Sparen und Helfen </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Der monatliche Los Preis beträgt 5€, wobei 4€ gespart werden. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was kann ich gewinnen?</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Mit dem einem Euro nimmst du an der Verlosung teil. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Neben attraktiven Geldpreisen werden auch Sachpreise wie zum Beispiel Autos und Reisen verlost. </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist eine Soziallotterie? </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Je Los fließen pro Monat 25 Cent an gemeinnützige Zwecke </p>', unsafe_allow_html=True)
-                        
+                            gewinnsparen()
+
                         if (emotion == 'fear' or emotion == 'surprise'):
-                            st.markdown('<p class="font">Dein Produkt: Sterbegeld</p>', unsafe_allow_html=True)
-                            st.markdown('<p class="sub">Was ist die Sterbegeldversicherung? </p>', unsafe_allow_html=True)
-                            st.markdown('<p class="main">  Im Todesfall eines Versicherten wird eine festgelegte Summe an den Hinterbliebenen ausgezahlt. Diese Auszahlung soll die Bestattungskosten decken. </p>', unsafe_allow_html=True)
-                            
+                            sterbegeld()
+
                     st.write("")
                     st.write("")
                     st.write("")
@@ -284,13 +390,47 @@ def main():
                     st.markdown('<p class="main">Laut unserer Bildanalyse bist du {} und {}. </p>'.format(x, a), unsafe_allow_html=True)
 
 
-
-
     elif choice == "Alle Produkte":
         with st.container():
             col1, col2 = st.columns([0.8, 0.2])
             with col1:
                 st.markdown('<p class="font">Unsere Produkte im Überblick</p>', unsafe_allow_html=True)
+                st.markdown(
+                    """<style>.streamlit-expanderHeader {font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;
+                }</style>
+                """, unsafe_allow_html=True,)
+
+                with st.expander("Aktien" ,expanded= False):
+                    aktien()
+                with st.expander("Bausparvertrag", expanded=False):
+                    bausparvertrag()
+                with st.expander("Berufsunfähigkeitsversicherung", expanded=False):
+                    bu()
+                with st.expander("Gewinnsparen", expanded=False):
+                    gewinnsparen()
+                with st.expander("Girokonto", expanded=False):
+                    girokonto()
+                with st.expander("Katastrophenschutz", expanded=False):
+                    katastrophenschutz()
+                with st.expander("Kredit", expanded=False):
+                    kredit()
+                with st.expander("Lebensversicherung", expanded=False):
+                    lebensversicherung()
+                with st.expander("Mitgliedschaft", expanded=False):
+                    mitgliedschaft()
+                with st.expander("Rechtsschutzversicherung", expanded=False):
+                    rechtsschutz()
+                with st.expander("Sparbuch", expanded=False):
+                    sparbuch()
+                with st.expander("Sparbuch für Enkel", expanded=False):
+                    enkel()
+                with st.expander("Sterbegeld- oder Hausratsversicherung", expanded=False):
+                    sterbegeld()
+                with st.expander("Vermögensberatung", expanded=False):
+                    vermögen()
+                with st.expander("Werbegeschenk", expanded=False):
+                    werbegeschenk()
+
 
             with col2:
                 st.image(logo, width=130)
@@ -298,6 +438,10 @@ def main():
 
 if __name__ == '__main__':
 		main()
+
+
+
+
 
 
 
