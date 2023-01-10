@@ -57,8 +57,8 @@ def main():
         with colb:
             st.image(logo)
 
-        choice = option_menu(None, ["Über Uns", "Produktanalyse", "Alle Produkte"],
-                             icons=["person lines fill", "camera fill","camera-reels", "basket"],
+        choice = option_menu(None, ["Produktanalyse", "Alle Produkte", "Über Uns"],
+                             icons=["camera fill", "basket", "person lines fill"],
                              #menu_icon="app-indicator",
                              default_index=0,
                              styles={
