@@ -212,7 +212,7 @@ def main():
     st.markdown(""" <style> .font { font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
     st.markdown(""" <style> .sub { font-size:25px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
     st.markdown(""" <style> .small {text-align: center; font-size:25px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
-    st.markdown(""" <style> .smallblack { font-size:20px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
+    st.markdown(""" <style> .smallblack {text-align: center; font-size:20px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
 
     with st.sidebar.container():
         logo = Image.open('Logo_nobg1.png')
@@ -223,7 +223,7 @@ def main():
             st.image(logo)
 
         choice = option_menu(None, ["Über Uns", "Produktanalyse", "Alle Produkte"],
-                             icons=["camera fill", "basket", "person lines fill"],
+                             icons=["person lines fill", "camera fill", "basket"],
                              default_index=0,
                              styles={
                                  "container": {"padding": "5!important", "background-color": "#fafafa"},
@@ -234,7 +234,7 @@ def main():
                              }
                              )
 
-    logo = Image.open('Fox_banking.png')
+    logo = Image.open('Fox_Banking.png')
 
     if choice == "Über Uns":
         col1, col2 = st.columns([0.8, 0.2])
