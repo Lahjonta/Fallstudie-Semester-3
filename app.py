@@ -14,13 +14,18 @@ import pandas as pd
 conn = sq.connect('fox_banking.db')
 c = conn.cursor()
 
+#create tables for database overview, model and feedback for fox banking
 def create_table():
-    c.execute("CREATE TABLE IF NOT EXISTS feedback(Foto BLOB, Alter_gold INTEGER, Emotion_gold TEXT, Alter_Vorhersage INTEGER, Emotion_Vorhersage TEXT, Produkt TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS overview(Foto BLOB, Alter_gold INTEGER, Emotion_gold TEXT, Alter_Vorhersage INTEGER, Emotion_Vorhersage TEXT, Produkt TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS model(Foto BLOB, Alter_gold INTEGER, Emotion_gold TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS feedback_bank(Alter_gold INTEGER, Emotion_gold TEXT, Produkt TEXT)")
 
+#add data from web app to tables
 def add_feedback(Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt):
-    c.execute("INSERT INTO feedback(Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt) VALUES (?,?,?,?,?,?)", (Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt))
+    c.execute("INSERT INTO overview(Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt) VALUES (?,?,?,?,?,?)", (Foto, Alter_gold, Emotion_gold, Alter_Vorhersage, Emotion_Vorhersage, Produkt))
+    c.execute("INSERT INTO model(Foto, Alter_gold, Emotion_gold) VALUES (?,?,?)",(Foto, Alter_gold, Emotion_gold))
+    c.execute("INSERT INTO feedback_bank(Alter_gold, Emotion_gold, Produkt) VALUES (?,?,?)", (Alter_gold, Emotion_gold, Produkt))
     conn.commit()
-
 
 # function to load image
 try:
@@ -208,11 +213,12 @@ def main():
         page_icon="🦊",
         layout="wide",
     )
+
     st.markdown(""" <style> .main { font-size:15px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
     st.markdown(""" <style> .font { font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
     st.markdown(""" <style> .sub { font-size:25px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
     st.markdown(""" <style> .small {text-align: center; font-size:25px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
-    st.markdown(""" <style> .smallblack { font-size:20px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
+    st.markdown(""" <style> .smallblack {text-align: center; font-size:20px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
 
     with st.sidebar.container():
         logo = Image.open('Logo_nobg1.png')
@@ -223,7 +229,7 @@ def main():
             st.image(logo)
 
         choice = option_menu(None, ["Über Uns", "Produktanalyse", "Alle Produkte"],
-                             icons=["camera fill", "basket", "person lines fill"],
+                             icons=["person lines fill", "camera fill", "basket"],
                              default_index=0,
                              styles={
                                  "container": {"padding": "5!important", "background-color": "#fafafa"},
@@ -251,9 +257,7 @@ def main():
             unsafe_allow_html=True)
         st.write("")
         st.write("")
-        col1, col2, col3 = st.columns(3)
-        with col2:
-            st.markdown('<p class="small">Darum Fox Banking:</p>', unsafe_allow_html=True)
+        st.markdown('<p class="small">Darum Fox Banking:</p>', unsafe_allow_html=True)
 
         st.write("")
         st.write("")
