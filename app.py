@@ -176,9 +176,7 @@ def vermögen():
     st.markdown('<p class="font">Dein Produkt: Vermögensberatung</p>', unsafe_allow_html=True)
     st.markdown('<p class="sub">Was ist eine Vermögensberatung?</p>', unsafe_allow_html=True)
     st.markdown('<p class="main">  Optimierung und Analyse von Vermögenswerten </p>', unsafe_allow_html=True)
-    st.markdown(
-        '<p class="sub">Buche einen Termin mit deine(r) BeraterIn und hole ein unverbindliches Angebot</p>',
-        unsafe_allow_html=True)
+    st.markdown('<p class="sub">Buche einen Termin mit deine(r) BeraterIn und hole ein unverbindliches Angebot</p>',unsafe_allow_html=True)
 
 def gewinnsparen():
     st.markdown('<p class="font">Dein Produkt: Gewinnsparen</p>', unsafe_allow_html=True)
@@ -213,6 +211,8 @@ def main():
     st.markdown(""" <style> .main { font-size:15px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
     st.markdown(""" <style> .font { font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
     st.markdown(""" <style> .sub { font-size:25px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
+    st.markdown(""" <style> .small {text-align: center; font-size:25px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
+    st.markdown(""" <style> .smallblack { font-size:20px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
 
     with st.sidebar.container():
         logo = Image.open('Logo_nobg1.png')
@@ -240,9 +240,58 @@ def main():
         col1, col2 = st.columns([0.8, 0.2])
         with col1:  # To display the header text using css style
             st.markdown('<p class="font">Fox Banking</p>', unsafe_allow_html=True)
+            st.markdown('<p class="sub">Wir über uns:</p>', unsafe_allow_html=True)
+
+
         with col2:  # To display brand log
             st.image(logo, width=130)
-        st.markdown('<p class="main" >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', unsafe_allow_html=True)
+
+        st.markdown(
+            '<p class="main">Bei Fox Banking liegt uns Kundennähe besonders am Herzen, deshalb haben wir für euch eine App entwickelt mit der ihr mit einem von euch hochgeladenen Bild ganz einfach das perfekte Produkt für euch finden könnt. Auch bieten wir euch die Möglichkeit ein über unser breites Angebot einen kurzen Überblick zu verschaffen. Für weitere Informationen könnt ihr jederzeit  ein Termin mit uns vereinbaren.</p>',
+            unsafe_allow_html=True)
+        st.write("")
+        st.write("")
+        col1, col2, col3 = st.columns(3)
+        with col2:
+            st.markdown('<p class="small">Darum Fox Banking:</p>', unsafe_allow_html=True)
+
+        st.write("")
+        st.write("")
+
+        cola, colb, colc = st.columns(3)
+        with cola:
+            colx, coly, colz =st.columns(3)
+            with coly:
+                woman = Image.open('frau.png')
+                st.image(woman)
+                st.markdown('<p class="smallblack">Persönliche Beratung und Unterstützung</p>', unsafe_allow_html=True)
+        with colb:
+            colx, coly, colz = st.columns(3)
+            with coly:
+                phone = Image.open('smartphone.png')
+                st.image(phone)
+                st.markdown('<p class="smallblack">Innovatives Online-Banking</p>', unsafe_allow_html=True)
+        with colc:
+            colx, coly, colz = st.columns(3)
+            with coly:
+                plant = Image.open('die-gluhbirne.png')
+                st.image(plant)
+                st.markdown('<p class="smallblack">Nachhaltige Produkte</p>', unsafe_allow_html=True)
+
+        st.write("")
+        st.write("")
+
+        buttons = option_menu(None, ["Weitere Informationen", "Vereinbare einen Termin", "E-Mail Kontakt"],
+                              icons=["book", "telephone", "envelope"],
+                              orientation="horizontal",
+                              styles={
+                                  "container": {"padding": "5!important", "background-color": "#fafafa"},
+                                  "icon": {"color": "#ffb166", "font-size": "25px"},
+                                  "nav-link": {"font-size": "20px", "text-align": "center", "margin": "0px",
+                                               "--hover-color": "#eee"},
+                                  "nav-link-selected": {"background-color": "#02ab21"},
+                              }
+                              )
 
 
     elif choice == "Produktanalyse":
