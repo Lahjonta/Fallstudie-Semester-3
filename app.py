@@ -240,7 +240,7 @@ def main():
                              }
                              )
 
-    logo = Image.open('Fox_banking.png')
+    logo = Image.open('Fox_Banking.png')
 
     if choice == "Über Uns":
         col1, col2 = st.columns([0.8, 0.2])
