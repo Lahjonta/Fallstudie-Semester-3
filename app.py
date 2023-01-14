@@ -4,10 +4,10 @@ import cv2
 from PIL import Image
 import numpy as np
 from deepface import DeepFace
-import age_detection
 import sqlite3 as sq
 import io
 import pandas as pd
+import age_detection
 
 
 #create SQLite Database to store feedback
@@ -37,14 +37,12 @@ except Exception:
 def analyze_image(uploaded_image):
     new_image = np.array(uploaded_image.convert('RGB'))  # converting image into array
     image = cv2.cvtColor(new_image, 1)
-
     em = DeepFace.analyze(image, actions=['emotion'], enforce_detection=False)
     global emotion
     emotion = em['dominant_emotion']
-
     return emotion
 
-#products
+# <editor-fold desc="product description">
 def sparbuch():
     st.markdown('<p class="font">Dein Produkt: Sparbuch</p>', unsafe_allow_html=True)
     st.markdown('<p class="sub">Was ist ein Sparbuch?</p>', unsafe_allow_html=True)
@@ -207,19 +205,24 @@ def sterbegeld():
         '<p class="main">  Im Todesfall eines Versicherten wird eine festgelegte Summe an den Hinterbliebenen ausgezahlt. Diese Auszahlung soll die Bestattungskosten decken. </p>',
         unsafe_allow_html=True)
 
+# </editor-fold>
+
 def main():
+    #set general page configuration
     st.set_page_config(
         page_title="Fox Banking",
         page_icon="🦊",
         layout="wide",
     )
 
+    #define different styles for text elements
     st.markdown(""" <style> .main { font-size:15px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
     st.markdown(""" <style> .font { font-size:35px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
     st.markdown(""" <style> .sub { font-size:25px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
     st.markdown(""" <style> .small {text-align: center; font-size:25px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;} </style> """, unsafe_allow_html=True)
     st.markdown(""" <style> .smallblack {text-align: center; font-size:20px}; font-family: 'Eras ITC', 'Eras Light ITC',; color: black;} </style>""", unsafe_allow_html=True)
 
+    #create the navigation sidebar
     with st.sidebar.container():
         logo = Image.open('Logo_nobg1.png')
         cola, colb = st.columns([0.8, 0.2])
@@ -242,6 +245,7 @@ def main():
 
     logo = Image.open('Fox_Banking.png')
 
+    #define pages clicked in sidebar
     if choice == "Über Uns":
         col1, col2 = st.columns([0.8, 0.2])
         with col1:  # To display the header text using css style
@@ -297,7 +301,7 @@ def main():
                               }
                               )
 
-
+    #page with web app
     elif choice == "Produktanalyse":
         col1, col2 = st.columns(2)
         col3, col4 = st.columns(2)
@@ -318,8 +322,10 @@ def main():
                 """,
                     unsafe_allow_html=True,
                 )
+                #uploader for user to select image file
                 with st.expander("Wähle ein Bild aus!", expanded=False):
                     image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
+                #display image and convert to use in age detection
                 if image_file is not None:
                     uploaded_image = Image.open(image_file)
                     buf = io.BytesIO()
@@ -330,6 +336,7 @@ def main():
                     nimg = np.array(uploaded_image)
                     cv_image = cv2.cvtColor(nimg, cv2.COLOR_RGB2BGR)
 
+        #send image bytes to DeepFace and age detection model & display product based on results
         with col2:
             cola, colb, colc = st.columns(3)
             with colc:
@@ -339,6 +346,7 @@ def main():
                     with st.spinner("Berechnung"):
                         emotion = analyze_image(uploaded_image)
                         age = age_detection.predict_age(cv_image)
+                        #age = age2.age_prediction(cv_image)
                     if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
                         if (emotion == 'happy'):
                             sparbuch()
@@ -390,7 +398,8 @@ def main():
                     st.write("")
                     st.write("")
                     st.write("")
-                    #Feedback form for users
+
+                    #feedback form for users
                     st.markdown('<p class="sub">Möchtest Du Feedback geben?</p>', unsafe_allow_html=True)
                     q1 = st.number_input("Wie alt bist Du?", min_value=0, max_value=120)
                     q2 = st.selectbox("Wie würdest Du Deine momentane Emotion beschreiben", (
@@ -440,9 +449,10 @@ def main():
                         a = 'Erwachsen'
                     if (age == '(60, 100)'):
                         a = 'eine ältere Person'
+
                     st.markdown('<p class="main">Laut unserer Bildanalyse bist du {} und {}. </p>'.format(x, a), unsafe_allow_html=True)
 
-
+#page with all possible product results as an overview
     elif choice == "Alle Produkte":
         with st.container():
             col1, col2 = st.columns([0.8, 0.2])
