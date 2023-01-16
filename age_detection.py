@@ -1,31 +1,29 @@
 import cv2
 import numpy as np
 
-# The model architecture
-# download from: https://drive.google.com/open?id=1kiusFljZc9QfcIYdU2s7xrtWHTraHwmW
-AGE_MODEL = './age/deploy_age.prototxt'
-# The model pre-trained weights
-# download from: https://drive.google.com/open?id=1kWv0AjxGSN0g31OeJa02eBGM0R_jcjIl
-AGE_PROTO = './age/age_net.caffemodel'
-# Each Caffe Model impose the shape of the input image also image preprocessing is required like mean
-# substraction to eliminate the effect of illunination changes
-MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
-# Represent the 8 age classes of this CNN probability layer
-AGE_INTERVALS = ['(0, 2)', '(4, 6)', '(8, 12)', '(15, 20)',
+# The model architecture & pretrained weights
+# download from: https://drive.google.com/open?id=1kiusFljZc9QfcIYdU2s7xrtWHTraHwmW, https://drive.google.com/open?id=1kWv0AjxGSN0g31OeJa02eBGM0R_jcjIl
+model_age = './age/deploy_age.prototxt'
+age_proto = './age/age_net.caffemodel'
+model_means = (78.4263377603, 87.7689143744, 114.895847746)
+# define 8 age classes from training data set
+age_buckets = ['(0, 2)', '(4, 6)', '(8, 12)', '(15, 20)',
                  '(25, 32)', '(38, 43)', '(48, 53)', '(60, 100)']
-# download from: https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/deploy.prototxt
-FACE_PROTO = "./age/deploy.prototxt.txt"
-# download from: https://raw.githubusercontent.com/opencv/opencv_3rdparty/dnn_samples_face_detector_20180205_fp16/res10_300x300_ssd_iter_140000_fp16.caffemodel
-FACE_MODEL = "./age/res10_300x300_ssd_iter_140000_fp16.caffemodel"
-# Initialize frame size
+#face detection with OpenCV pre-trained model
+# download from: https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/deploy.prototxt, https://raw.githubusercontent.com/opencv/opencv_3rdparty/dnn_samples_face_detector_20180205_fp16/res10_300x300_ssd_iter_140000_fp16.caffemodel
+face_proto = "./age/deploy.prototxt.txt"
+model_face = "./age/res10_300x300_ssd_iter_140000_fp16.caffemodel"
+# Initialize frame size for image resizing
 frame_width = 1280
 frame_height = 720
-# load face Caffe model
-face_net = cv2.dnn.readNetFromCaffe(FACE_PROTO, FACE_MODEL)
-# Load age prediction model
-age_net = cv2.dnn.readNetFromCaffe(AGE_MODEL, AGE_PROTO)
+# load face detection model from weights
+face_net = cv2.dnn.readNetFromCaffe(face_proto, model_face)
+# Load age prediction model from weights
+age_net = cv2.dnn.readNetFromCaffe(model_age, age_proto)
 
-haar_detector = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+#define haar classifier for face detection
+cascade = './age/haarcascade_frontalface_default.xml'
+haar_detector = cv2.CascadeClassifier(cascade)
 
 
 def get_faces(frame, confidence_threshold=0.5):
@@ -36,7 +34,7 @@ def get_faces(frame, confidence_threshold=0.5):
     face_net.setInput(blob)
     # perform inference and get predictions
     output = np.squeeze(face_net.forward())
-    # initialize the result list
+    # list to store results for face locations
     faces = []
     # Loop over the faces detected
     for i in range(output.shape[0]):
@@ -91,24 +89,25 @@ def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     # resize the image
     return cv2.resize(image, dim, interpolation = inter)
 
+#predict age of faces found in image
 def predict_age(img):
-    """Predict the age of the faces showing in the image"""
-    # Take a copy of the initial image and resize it
+    # resize image
     frame = img.copy()
     if frame.shape[1] > frame_width:
         frame = image_resize(frame, width=frame_width)
     faces = get_faces(frame)
+    #save image as blob and send to age model
     for i, (start_x, start_y, end_x, end_y) in enumerate(faces):
         face_img = frame[start_y: end_y, start_x: end_x]
         # image --> Input image to preprocess before passing it through our dnn for classification.
         blob = cv2.dnn.blobFromImage(
             image=face_img, scalefactor=1.0, size=(227, 227),
-            mean=MODEL_MEAN_VALUES, swapRB=False
+            mean=model_means, swapRB=False
         )
-        # Predict Age
+        # Predict Age and return bucket
         age_net.setInput(blob)
         age_preds = age_net.forward()
         i = age_preds[0].argmax()
         global age
-        age = AGE_INTERVALS[i]
+        age = age_buckets[i]
         return age

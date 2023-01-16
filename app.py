@@ -444,9 +444,9 @@ def main():
                         x = 'überrascht'
 
                     if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
-                        a = 'ein Kind'
+                        a = 'jung'
                     if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
-                        a = 'Erwachsen'
+                        a = 'erwachsen'
                     if (age == '(60, 100)'):
                         a = 'eine ältere Person'
 
