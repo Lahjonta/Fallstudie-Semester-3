@@ -231,7 +231,7 @@ def main():
         with colb:
             st.image(logo)
 
-        choice = option_menu(None, ["Über Uns", "Produktanalyse", "Alle Produkte"],
+        choice = option_menu(None, ["Über Uns", "Fox Vision", "Alle Produkte"],
                              icons=["person lines fill", "camera fill", "basket"],
                              default_index=0,
                              styles={
@@ -302,7 +302,7 @@ def main():
                               )
 
     #page with web app
-    elif choice == "Produktanalyse":
+    elif choice == "Fox Vision":
         col1, col2 = st.columns(2)
         col3, col4 = st.columns(2)
         with col1:
