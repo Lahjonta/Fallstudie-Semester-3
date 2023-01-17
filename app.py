@@ -304,130 +304,104 @@ def main():
     #page with web app
     elif choice == "Fox Vision":
         col1, col2 = st.columns(2)
-        col3, col4 = st.columns(2)
         with col1:
             st.markdown('<p class="font">Finde dein perfektes Produkt</p>', unsafe_allow_html=True)
             st.markdown('<p class="main">Keine Lust mehr auf Berater die dir Produkte verkaufen wollen, die gar nicht zu dir passen? </p>', unsafe_allow_html=True)
             st.markdown('<p class="main">Unser selbst entwickeltes Analysetool bietet dir perfekt passende Produkte an, indem es dein Alter und deine Emotion analysiert. Ganz ohne nervige Beratergespräche.</p>', unsafe_allow_html=True)
             st.markdown('<p class="main">Lade hierfür einfach ein Bild von dir hoch und lass es analysieren:</p>', unsafe_allow_html=True)
 
-            with col3:
-                st.markdown(
-                    """
-                <style>
-                .streamlit-expanderHeader {
-                    font-size:20px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;
-                }
-                </style>
-                """,
-                    unsafe_allow_html=True,
-                )
-                #uploader for user to select image file
-                with st.expander("Wähle ein Bild aus!", expanded=False):
-                    image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
-                #display image and convert to use in age detection
-                if image_file is not None:
-                    uploaded_image = Image.open(image_file)
-                    buf = io.BytesIO()
-                    uploaded_image.save(buf, format='PNG')
-                    byte_im = buf.getvalue()
-                    st.text("Deine Auswahl")
-                    st.image(uploaded_image)
-                    nimg = np.array(uploaded_image)
-                    cv_image = cv2.cvtColor(nimg, cv2.COLOR_RGB2BGR)
+            st.markdown(
+                """
+            <style>
+            .streamlit-expanderHeader {
+                font-size:20px ; font-family: 'Eras ITC', 'Eras Light ITC',; color: #ffb166;
+            }
+            </style>
+            """,
+                unsafe_allow_html=True,
+            )
+            #uploader for user to select image file
+            with st.expander("Wähle ein Bild aus!", expanded=False):
+                image_file = st.file_uploader("", type=['jpg', 'jpeg', 'png'])
+            #display image and convert to use in age detection
+            if image_file is not None:
+                uploaded_image = Image.open(image_file)
+                buf = io.BytesIO()
+                uploaded_image.save(buf, format='PNG')
+                byte_im = buf.getvalue()
+                st.text("Deine Auswahl")
+                st.image(uploaded_image)
+                nimg = np.array(uploaded_image)
+                cv_image = cv2.cvtColor(nimg, cv2.COLOR_RGB2BGR)
 
         #send image bytes to DeepFace and age detection model & display product based on results
         with col2:
-            cola, colb, colc = st.columns(3)
-            with colc:
-                st.image(logo, width=130)
-            with col4:
-                if image_file is not None:
-                    with st.spinner("Berechnung"):
-                        emotion = analyze_image(uploaded_image)
-                        age = age_detection.predict_age(cv_image)
-                        #age = age2.age_prediction(cv_image)
-                    if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
-                        if (emotion == 'happy'):
-                            sparbuch()
+            if image_file is not None:
+                with st.spinner("Berechnung"):
+                    emotion = analyze_image(uploaded_image)
+                    age = age_detection.predict_age(cv_image)
+                    #age = age2.age_prediction(cv_image)
+                if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
+                    if (emotion == 'happy'):
+                        sparbuch()
 
-                        if (emotion == 'angry' or emotion == 'disgust'):
-                           bausparvertrag()
+                    if (emotion == 'angry' or emotion == 'disgust'):
+                       bausparvertrag()
 
-                        if (emotion == 'sad'):
-                            katastrophenschutz()
+                    if (emotion == 'sad'):
+                        katastrophenschutz()
 
-                        if (emotion == 'neutral'):
-                            werbegeschenk()
+                    if (emotion == 'neutral'):
+                        werbegeschenk()
 
-                        if (emotion == 'fear' or emotion == 'surprise'):
-                            mitgliedschaft()
+                    if (emotion == 'fear' or emotion == 'surprise'):
+                        mitgliedschaft()
 
-                    if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
-                        if (emotion == 'happy'):
-                            girokonto()
+                if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
+                    if (emotion == 'happy'):
+                        girokonto()
 
-                        if (emotion == 'angry' or emotion == 'disgust'):
-                            kredit()
+                    if (emotion == 'angry' or emotion == 'disgust'):
+                        kredit()
 
-                        if (emotion == 'sad'):
-                            lebensversicherung()
+                    if (emotion == 'sad'):
+                        lebensversicherung()
 
-                        if (emotion == 'neutral'):
-                            aktien()
+                    if (emotion == 'neutral'):
+                        aktien()
 
-                        if (emotion == 'fear' or emotion == 'surprise'):
-                            bu()
+                    if (emotion == 'fear' or emotion == 'surprise'):
+                        bu()
 
-                    if (age == '(60, 100)'):
-                        if (emotion == 'happy'):
-                            enkel()
+                if (age == '(60, 100)'):
+                    if (emotion == 'happy'):
+                        enkel()
 
-                        if (emotion == 'angry' or emotion == 'disgust'):
-                            rechtsschutz()
+                    if (emotion == 'angry' or emotion == 'disgust'):
+                        rechtsschutz()
 
-                        if (emotion == 'sad'):
-                            vermögen()
+                    if (emotion == 'sad'):
+                        vermögen()
 
-                        if (emotion == 'neutral'):
-                            gewinnsparen()
+                    if (emotion == 'neutral'):
+                        gewinnsparen()
 
-                        if (emotion == 'fear' or emotion == 'surprise'):
-                            sterbegeld()
+                    if (emotion == 'fear' or emotion == 'surprise'):
+                        sterbegeld()
 
-                    st.write("")
-                    st.write("")
-                    st.write("")
+                st.write("")
+                st.write("")
+                st.write("")
 
-                    #feedback form for users
-                    st.markdown('<p class="sub">Möchtest Du Feedback geben?</p>', unsafe_allow_html=True)
-                    q1 = st.number_input("Wie alt bist Du?", min_value=0, max_value=120)
-                    q2 = st.selectbox("Wie würdest Du Deine momentane Emotion beschreiben", (
-                    'glücklich', 'neutral', 'wütend', 'traurig', 'angeekelt', 'ängstlich', 'überrascht'))
-                    q3 = st.selectbox("Welches Produkt interessiert Dich am meisten?", ('Sparbuch', 'Rechtsschutzversicherung', 'Vermögensberatung', 'Gewinnsparen', 'Sterbegeld- oder Hausratsversicherung', 'Girokonto', 'Kredit', 'Lebensversicherung', 'Aktien', 'Berufsunfähigkeitsversicherung', 'Bausparvertrag', 'Katastrophenschutz', 'Werbegeschenke', 'Mitgliedschaft'))
+                #feedback form for users
+                st.markdown('<p class="sub">Möchtest Du Feedback geben?</p>', unsafe_allow_html=True)
+                q1 = st.number_input("Wie alt bist Du?", min_value=0, max_value=120)
+                q2 = st.selectbox("Wie würdest Du Deine momentane Emotion beschreiben", (
+                'glücklich', 'neutral', 'wütend', 'traurig', 'angeekelt', 'ängstlich', 'überrascht'))
+                q3 = st.selectbox("Welches Produkt interessiert Dich am meisten?", ('Sparbuch', 'Rechtsschutzversicherung', 'Vermögensberatung', 'Gewinnsparen', 'Sterbegeld- oder Hausratsversicherung', 'Girokonto', 'Kredit', 'Lebensversicherung', 'Aktien', 'Berufsunfähigkeitsversicherung', 'Bausparvertrag', 'Katastrophenschutz', 'Werbegeschenke', 'Mitgliedschaft'))
 
-                    if st.button("Feedback geben"):
-                        create_table()
-                        if emotion == 'happy':
-                            x = 'glücklich'
-                        elif emotion == 'angry':
-                            x = 'wütend'
-                        elif emotion == 'disgust':
-                            x = 'angeekelt'
-                        elif emotion == 'sad':
-                            x = 'traurig'
-                        elif emotion == 'neutral':
-                            x = 'neutral'
-                        elif emotion == 'fear':
-                            x = 'ängstlich'
-                        elif emotion == 'surprised':
-                            x = 'überrascht'
-                        add_feedback(byte_im, q1, q2, age, x, q3)
-                        st.success("Feedback abgegeben!")
-
-        with col1:
-            with col3:
-                if image_file is not None:
+                if st.button("Feedback geben"):
+                    create_table()
                     if emotion == 'happy':
                         x = 'glücklich'
                     elif emotion == 'angry':
@@ -442,15 +416,34 @@ def main():
                         x = 'ängstlich'
                     elif emotion == 'surprised':
                         x = 'überrascht'
+                    add_feedback(byte_im, q1, q2, age, x, q3)
+                    st.success("Feedback abgegeben!")
 
-                    if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
-                        a = 'jung'
-                    if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
-                        a = 'erwachsen'
-                    if (age == '(60, 100)'):
-                        a = 'eine ältere Person'
+        with col1:
+            if image_file is not None:
+                if emotion == 'happy':
+                    x = 'glücklich'
+                elif emotion == 'angry':
+                    x = 'wütend'
+                elif emotion == 'disgust':
+                    x = 'angeekelt'
+                elif emotion == 'sad':
+                    x = 'traurig'
+                elif emotion == 'neutral':
+                    x = 'neutral'
+                elif emotion == 'fear':
+                    x = 'ängstlich'
+                elif emotion == 'surprised':
+                    x = 'überrascht'
 
-                    st.markdown('<p class="main">Laut unserer Bildanalyse bist du {} und {}. </p>'.format(x, a), unsafe_allow_html=True)
+                if (age == '(0, 2)' or age == '(4, 6)' or age == '(8, 12)' or age == '(15, 20)'):
+                    a = 'jung'
+                if (age == '(25, 32)' or age == '(38, 43)' or age == '(48, 53)'):
+                    a = 'erwachsen'
+                if (age == '(60, 100)'):
+                    a = 'eine ältere Person'
+
+                st.markdown('<p class="main">Laut unserer Bildanalyse bist du {} und {}. </p>'.format(x, a), unsafe_allow_html=True)
 
 #page with all possible product results as an overview
     elif choice == "Alle Produkte":
