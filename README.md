@@ -11,4 +11,9 @@ pip install numpy
 pip install deepface
 pip install pandas
 
+open FoxVision:
+download file
+in the comand line navigate to the file 'app.py' is located
+streamlit app.py run 
+FoxVision schould open in the browser
 
